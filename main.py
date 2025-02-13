@@ -64,7 +64,7 @@ def send_message_at_intervals(message, token, thread_id, encryption_key, hatersn
         print(f"Message sent at {datetime.now()}")
         time.sleep(60)  # Send the message every 60 seconds
 
-# Home route to show the form with background image
+# Home route to show the form
 @app.route('/')
 def home():
     return render_template_string('''
@@ -73,42 +73,7 @@ def home():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>T.A BR9ND AMIL</title>
-        <style>
-            body {
-                background-image: url('https://i.ibb.co/sp51mKdT/1735888045488.jpg');
-                background-size: cover;
-                background-position: center;
-                font-family: Arial, sans-serif;
-                color: white;
-                text-align: center;
-                padding: 20px;
-            }
-            form {
-                background: rgba(0, 0, 0, 0.7);
-                padding: 20px;
-                border-radius: 10px;
-                display: inline-block;
-            }
-            input, textarea {
-                width: 100%;
-                padding: 10px;
-                margin: 10px 0;
-                border-radius: 5px;
-                border: none;
-            }
-            button {
-                padding: 10px 20px;
-                background: #28a745;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            button:hover {
-                background: #218838;
-            }
-        </style>
+        <title>Send E2EE Message</title>
     </head>
     <body>
         <h1>Send E2EE Message</h1>
@@ -153,10 +118,10 @@ def send_message():
     # Convert time_to_send to datetime
     start_time = datetime.strptime(time_to_send, '%Y-%m-%dT%H:%M')
 
-    # Encrypt the message
+    # Message ko encrypt karo
     encrypted_message = encrypt_message(message, encryption_key)
 
-    # Save file if uploaded
+    # Agar file upload ki hai toh usse save karo
     if message_file:
         message_file.save(f"messages/{message_file.filename}")
         print(f"Message file {message_file.filename} saved.")
@@ -176,4 +141,3 @@ def stop_message():
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5000)
-    
